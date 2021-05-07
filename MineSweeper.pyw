@@ -4,7 +4,7 @@ import sys
 import time
 
 pygame.init()  # 初始化
-version = '2.0.0'
+version = '2.0'
 # 变量池
 line = 15
 row = 10
@@ -84,6 +84,7 @@ def eventCheck():
             elif event.key == pygame.K_F5:
                 linkStart()
             elif event.key == pygame.K_HOME:
+                X, Y = 80, 10
                 menuBool = openMenu(menuBool)
                 mainDisplay(option)
                 pygame.display.update()
@@ -136,7 +137,8 @@ def mineUpdate():
         line = 15
         row = 10
         warningText = OPT_FONT.render('Too much blocks on the screen!', True, RED, None)
-        mainScreen.blit(warningText, (103, 22))
+        mainScreen.blit(warningText, (47, 29))
+        pygame.display.update()
         time.sleep(1.00)
 
 
@@ -146,7 +148,7 @@ def press(key, name):
         if len(string) != 0:
             output = int(''.join(string))
             mineUpdate()
-        Y += 20
+        Y += 25
         loca = 0
         string = []
         output = ''
@@ -170,7 +172,7 @@ def press(key, name):
         if len(string) != 0:
             output = int(''.join(string))
             mineUpdate()
-        Y += -20
+        Y += -25
         loca = 0
         string = []
         output = ''
@@ -179,7 +181,7 @@ def press(key, name):
         if len(string) != 0:
             output = int(''.join(string))
             mineUpdate()
-        Y += 20
+        Y += 25
         loca = 0
         string = []
         output = ''
@@ -192,7 +194,7 @@ def press(key, name):
         if len(string) != 0:
             output = int(''.join(string))
             mineUpdate()
-        Y += 20
+        Y += 25
         loca = 0
         string = []
         output = ''
@@ -227,7 +229,7 @@ def doubleClick():
 def seedCre(num):
     global location
     choiceList = list(range(line * row))
-    if 0 < num < line * row:
+    if 0 <= num < line * row:
         choiceList.pop(num)
     location = random.sample(choiceList, numMine)
     for i in range(line * row + 1):
@@ -269,7 +271,7 @@ def menuDraw():
     mainScreen.blit(menuText, (43, 3))
     numMineText = OPT_FONT.render('Number of mines :', True, DDDGREY, None)
     mainScreen.blit(numMineText, (5, 27))
-    numMineText = OPT_FONT.render(str(numMine - len(button))+' / '+str(line*row), True, DDDGREY, None)
+    numMineText = OPT_FONT.render(str(numMine - len(button))+' / '+str(numMine)+' / '+str(line*row), True, DDDGREY, None)
     mainScreen.blit(numMineText, (151, 28))
 
 
@@ -328,12 +330,12 @@ def optionMenu():
     mainScreen.blit(menuText, (4, 78))
     menuText = OPT_FONT.render('New Game', True, DDDGREY, None)
     mainScreen.blit(menuText, (4, 103))
-    menuText = OPT_FONT.render('                    F5', True, DGREY, None)
-    mainScreen.blit(menuText, (4, 103))
+    menuText = OPT_FONT.render('F5', True, DGREY, None)
+    mainScreen.blit(menuText, (107, 103))
     menuText = OPT_FONT.render('Quit', True, DDDGREY, None)
     mainScreen.blit(menuText, (4, 128))
-    menuText = OPT_FONT.render('                   Esc', True, DGREY, None)
-    mainScreen.blit(menuText, (4, 128))
+    menuText = OPT_FONT.render('Esc', True, DGREY, None)
+    mainScreen.blit(menuText, (100, 128))
 
     def cursor(n):
         pygame.draw.line(mainScreen, BLACK, (73 + 9 * loca, 29 + 25 * n), (73 + 9 * loca, 46 + 25 * n), 1)
